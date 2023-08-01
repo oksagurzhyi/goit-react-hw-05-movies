@@ -5,7 +5,7 @@
 .header-container {
   display: flex;
   width: 100%;
-  background-color: bisque;
+  background-color: #88a2ad;
   justify-content: center;
 }
 
@@ -21,8 +21,7 @@
 
   text-decoration: none;
 }
-
-.nav-link.active {
+.active {
   color: red;
 }
 
@@ -32,5 +31,5 @@
   margin: 0 auto;
   padding: 20px;
   justify-content: center;
-  background-color: aquamarine;
+  background-color: #f1f3f4;
 }

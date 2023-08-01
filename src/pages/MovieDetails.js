@@ -1,16 +1,61 @@
-import { Link, Outlet } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { fetchMovieById } from 'services/fetchAPI';
+import '../index.css';
 
 const MovieDetails = () => {
+  const [data, setData] = useState(null);
+  const { movieId } = useParams();
+  const location = useLocation();
+
+  const backLocation = useRef(location.state?.from ?? '/movies');
+
+  useEffect(() => {
+    fetchMovieById(movieId).then(details => {
+      setData(details);
+    });
+  }, [movieId]);
+
+  if (!data) return;
+
   return (
     <>
-      <h2>Additional Information</h2>
-      <Link to="/">Go back</Link>
+      <Link to={backLocation.current}>Go back</Link>
+      {data && (
+        <div className="infoContainer">
+          <div>
+            <img
+              src={`http://image.tmdb.org/t/p/w300/${data.backdrop_path}`}
+              alt={data.original_title}
+            />
+          </div>
+          <div className="movieDetails">
+            <h1>
+              {data.original_title} ({data.release_date.slice(0, 4)})
+            </h1>
+            <p>User Score: {(data.vote_average * 10).toFixed(2)}%</p>
+            <h2>Overview </h2>
+            <p>{data.overview}</p>
+            <h2>Genres</h2>
+            {data.genres.length > 0 && (
+              <ul>
+                {data.genres.map(item => {
+                  return <li key={item.id}>{item.name}</li>;
+                })}
+              </ul>
+            )}
+          </div>
+        </div>
+      )}
+
+      <h3>Additional Information</h3>
+
       <ul>
         <li>
           <Link to="cast">Cast</Link>
         </li>
         <li>
-          <Link to="views">Views</Link>
+          <Link to="reviews">Views</Link>
         </li>
       </ul>
       <Outlet />

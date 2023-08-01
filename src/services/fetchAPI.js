@@ -13,12 +13,43 @@ export async function fetchMoviesTrend() {
   }
 }
 
-export async function fetchMovieByName() {
+export async function fetchMovieById(movie_id) {
   try {
-    const { movie } = await axios.get(
-      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}`
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${API_KEY}`
     );
-    return movie;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function fetchMovieByName(query) {
+  try {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${API_KEY}`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function movieCredits(movie_id) {
+  try {
+    const { data } = await axios.get(`
+https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${API_KEY}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function movieReviews(movie_id) {
+  try {
+    const { data } = await axios.get(`
+https://api.themoviedb.org/3/movie/${movie_id}/reviews?api_key=${API_KEY}`);
+    return data;
   } catch (error) {
     console.log(error);
   }
