@@ -10,8 +10,6 @@ const Movies = () => {
   const location = useLocation();
 
   const queryToFetch = searchParams.get('key');
-  console.log(queryToFetch);
-  console.log(query);
 
   const onhandleChange = e => {
     const query = e.target.value;

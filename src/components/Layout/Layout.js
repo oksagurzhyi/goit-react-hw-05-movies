@@ -7,10 +7,20 @@ const Layout = () => {
     <div className={css.wrapper}>
       <div className={css['header-container']}>
         <header className={css.header}>
-          <NavLink to="/" className={css['nav-link']}>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              [isActive ? css['active'] : '', css['nav-link']].join(' ')
+            }
+          >
             Home
           </NavLink>
-          <NavLink to="/movies" className={css['nav-link']}>
+          <NavLink
+            to="/movies"
+            className={({ isActive }) =>
+              [isActive ? css['active'] : '', css['nav-link']].join(' ')
+            }
+          >
             Movies
           </NavLink>
         </header>
