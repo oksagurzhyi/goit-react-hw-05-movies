@@ -11,6 +11,10 @@ const FormMovie = ({ onSubmit }) => {
 
   const onHandleSubmit = e => {
     e.preventDefault();
+
+    if (!query) {
+      return;
+    }
     onSubmit(query);
   };
 

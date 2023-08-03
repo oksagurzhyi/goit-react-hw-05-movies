@@ -13,10 +13,6 @@ const Movies = () => {
 
   const onSubmit = query => {
     setSearchParams({ query: query });
-
-    if (!query) {
-      setSearchParams({});
-    }
   };
 
   useEffect(() => {

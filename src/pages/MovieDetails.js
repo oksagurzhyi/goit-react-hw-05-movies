@@ -26,18 +26,14 @@ const MovieDetails = () => {
       {data && (
         <div className="infoContainer">
           <div>
-            {data.backdrop_path ? (
-              <img
-                src={`http://image.tmdb.org/t/p/w300/${data.backdrop_path}`}
-                alt={data.original_title}
-              />
-            ) : (
-              <img
-                src="./images/no_picture.jpg"
-                alt="noPicture"
-                style={{ width: '150px' }}
-              />
-            )}
+            <img
+              src={
+                data.backdrop_path
+                  ? `http://image.tmdb.org/t/p/w300/${data.backdrop_path}`
+                  : './images/no_picture.jpg'
+              }
+              alt={data.backdrop_path ? data.original_title : 'noPicture'}
+            />
           </div>
           <div className="movieDetails">
             <h1>

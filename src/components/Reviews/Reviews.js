@@ -19,7 +19,7 @@ const Reviews = () => {
 
   return data.results.length > 0 ? (
     <ul>
-      {data &&
+      {data?.results.length > 0 &&
         data.results.map(({ author, content, id }) => {
           return (
             <li key={id} className={css.listItem}>

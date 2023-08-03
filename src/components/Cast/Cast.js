@@ -15,19 +15,26 @@ const Cast = () => {
   return (
     <>
       <div>
-        {data &&
+        {data?.cast.length > 0 ? (
           data.cast.map(({ name, character, profile_path }) => {
             return (
               <div key={name}>
                 <img
-                  src={`http://image.tmdb.org/t/p/w200/${profile_path}`}
-                  alt={name}
+                  src={
+                    profile_path
+                      ? `http://image.tmdb.org/t/p/w200/${profile_path}`
+                      : '/src/images/no_picture.jpg'
+                  }
+                  alt={profile_path ? name : 'No Picture'}
                 />
                 <h3>{name}</h3>
                 <p>Character {character}</p>
               </div>
             );
-          })}
+          })
+        ) : (
+          <p>We don't have any information abour casts...</p>
+        )}
       </div>
     </>
   );
