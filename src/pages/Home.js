@@ -1,29 +1,18 @@
+import MovieInfo from 'components/MovieInfo/MovieInfo';
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+
 import { fetchMoviesTrend } from 'services/fetchAPI';
 
 const Home = () => {
   const [data, setData] = useState(null);
-  const location = useLocation();
 
   useEffect(() => {
-    fetchMoviesTrend().then(setData);
+    fetchMoviesTrend()
+      .then(data => setData(data.results))
+      .catch(error => console.error(`Error fetching movies trend:`, error));
   }, []);
 
-  return (
-    <ul>
-      {data &&
-        data.results.map(({ original_title, id }) => {
-          return (
-            <li key={id}>
-              <Link to={`movies/${id}`} state={{ from: location }}>
-                {original_title}
-              </Link>
-            </li>
-          );
-        })}
-    </ul>
-  );
+  return <MovieInfo data={data} />;
 };
 
 export default Home;

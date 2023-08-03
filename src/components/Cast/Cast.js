@@ -7,7 +7,9 @@ const Cast = () => {
   const { movieId } = useParams();
 
   useEffect(() => {
-    movieCredits(movieId).then(setData);
+    movieCredits(movieId)
+      .then(setData)
+      .catch(error => console.error(`Error fetching movies by cast:`, error));
   }, [movieId]);
 
   return (

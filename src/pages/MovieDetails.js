@@ -8,12 +8,14 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
 
-  const backLocation = useRef(location.state?.from ?? '/movies');
+  const backLocation = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
-    fetchMovieById(movieId).then(details => {
-      setData(details);
-    });
+    fetchMovieById(movieId)
+      .then(details => {
+        setData(details);
+      })
+      .catch(error => console.error(`Error fetching movies by id:`, error));
   }, [movieId]);
 
   if (!data) return;
@@ -24,10 +26,18 @@ const MovieDetails = () => {
       {data && (
         <div className="infoContainer">
           <div>
-            <img
-              src={`http://image.tmdb.org/t/p/w300/${data.backdrop_path}`}
-              alt={data.original_title}
-            />
+            {data.backdrop_path ? (
+              <img
+                src={`http://image.tmdb.org/t/p/w300/${data.backdrop_path}`}
+                alt={data.original_title}
+              />
+            ) : (
+              <img
+                src="./images/no_picture.jpg"
+                alt="noPicture"
+                style={{ width: '150px' }}
+              />
+            )}
           </div>
           <div className="movieDetails">
             <h1>

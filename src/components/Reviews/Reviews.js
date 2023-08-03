@@ -8,7 +8,11 @@ const Reviews = () => {
   const { movieId } = useParams();
 
   useEffect(() => {
-    movieReviews(movieId).then(setData);
+    movieReviews(movieId)
+      .then(setData)
+      .catch(error =>
+        console.error(`Error fetching movies for reviews:`, error)
+      );
   }, [movieId]);
 
   if (!data) return;
