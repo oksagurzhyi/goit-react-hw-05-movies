@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { movieCredits } from 'services/fetchAPI';
+import noImage from '../images/no_picture.jpg';
 
 const Cast = () => {
   const [data, setData] = useState(null);
@@ -23,7 +24,7 @@ const Cast = () => {
                   src={
                     profile_path
                       ? `http://image.tmdb.org/t/p/w200/${profile_path}`
-                      : '/src/images/no_picture.jpg'
+                      : { noImage }
                   }
                   alt={profile_path ? name : 'No Picture'}
                 />

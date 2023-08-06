@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { fetchMovieById } from 'services/fetchAPI';
 import '../index.css';
+import noImage from '../components/images/no_picture.jpg';
+
+console.log(noImage);
 
 const MovieDetails = () => {
   const [data, setData] = useState(null);
@@ -30,7 +33,7 @@ const MovieDetails = () => {
               src={
                 data.backdrop_path
                   ? `http://image.tmdb.org/t/p/w300/${data.backdrop_path}`
-                  : './images/no_picture.jpg'
+                  : { noImage }
               }
               alt={data.backdrop_path ? data.original_title : 'noPicture'}
             />
